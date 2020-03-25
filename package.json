@@ -1,0 +1,10 @@
+{
+  "name": "sns_back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "ewoos",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^3.8.3"
+  }
+}
