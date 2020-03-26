@@ -10,6 +10,7 @@ import { sequelize } from "./sequelize";
 import { dbType } from "./index";
 
 class User extends Model {
+  // 타입스크립트 타입 정의
   public id!: number;
 
   public nickname!: string;
@@ -36,6 +37,7 @@ class User extends Model {
 }
 
 User.init(
+  // 실제 db에 모델 작성
   {
     nickname: {
       type: DataTypes.STRING(20), // 20글자 이하

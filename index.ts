@@ -14,14 +14,14 @@ const prod: boolean = process.env.NODE_ENV === "production"; // 배포용인지 
 const app = express();
 
 sequelize
-  .sync({ force: false })
+  .sync({ force: false }) // models에 작성된 model 과 db 연결
   .then(() => {
     console.log("데이터베이스 연결 성공");
   })
   .catch((e: Error) => {
     console.error(e);
   });
-passportConfig();
+// passportConfig();
 
 if (prod) {
   app.use(hpp());
@@ -44,7 +44,7 @@ if (prod) {
 }
 
 app.use("/", express.static("uploads"));
-app.use(express.json());
+app.use(express.json()); // req.body를 읽을 수 있게 해줌
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
