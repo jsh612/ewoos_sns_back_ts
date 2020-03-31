@@ -7,7 +7,11 @@ import * as dotenv from "dotenv";
 import * as passport from "passport";
 import * as hpp from "hpp";
 import * as helmet from "helmet";
+
+import passportConfig from "./passport";
 import { sequelize } from "./models";
+import userAPIRouter from "./routes/user";
+import postAPIRouter from "./routes/post";
 
 dotenv.config();
 const prod: boolean = process.env.NODE_ENV === "production"; // 배포용인지 개발용인지 구분
@@ -21,7 +25,8 @@ sequelize
   .catch((e: Error) => {
     console.error(e);
   });
-// passportConfig();
+
+passportConfig(); // passport 연결
 
 if (prod) {
   app.use(hpp());
@@ -70,8 +75,8 @@ app.get("/", (req, res) => {
 // API는 다른 서비스가 내 서비스의 기능을 실행할 수 있게 열어둔 창구
 app.use("/api/user", userAPIRouter);
 app.use("/api/post", postAPIRouter);
-app.use("/api/posts", postsAPIRouter);
-app.use("/api/hashtag", hashtagAPIRouter);
+// app.use("/api/posts", postsAPIRouter);
+// app.use("/api/hashtag", hashtagAPIRouter);
 
 app.listen(prod ? process.env.PORT : 3065, () => {
   console.log(`server is running on ${process.env.PORT}`);

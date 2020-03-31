@@ -7,6 +7,7 @@ import User from "../models/user";
 import local from "./local";
 
 export default () => {
+  // serializeUser , deserializeUser ->  support login sessions
   passport.serializeUser((user: User, done) => {
     // 로그인시 호출 됨
     // Strategy 성공 시 호출됨

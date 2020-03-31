@@ -58,7 +58,7 @@ User.init(
     modelName: "User",
     tableName: "user",
     charset: "utf8",
-    collate: "utf8_general_ci" // 한글이 저장돼요
+    collate: "utf8_general_ci"
   }
 );
 
