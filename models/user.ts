@@ -3,7 +3,7 @@ import {
   BelongsToManyGetAssociationsMixin,
   BelongsToManyRemoveAssociationMixin,
   DataTypes,
-  Model
+  Model,
 } from "sequelize";
 import Post from "./post";
 import { sequelize } from "./sequelize";
@@ -19,6 +19,8 @@ class User extends Model {
 
   public password!: string;
 
+  // Belongs-To-Many associations에 의해 자동적으로 만들어진 함수
+  // https://sequelize.org/v5/manual/associations.html
   public addFollowing!: BelongsToManyAddAssociationMixin<User, number>;
 
   public getFollowings!: BelongsToManyGetAssociationsMixin<User>;
@@ -41,24 +43,24 @@ User.init(
   {
     nickname: {
       type: DataTypes.STRING(20), // 20글자 이하
-      allowNull: false // 필수
+      allowNull: false, // 필수
     },
     userId: {
       type: DataTypes.STRING(20),
       allowNull: false,
-      unique: true // 고유한 값
+      unique: true, // 고유한 값
     },
     password: {
       type: DataTypes.STRING(100), // 100글자 이하
-      allowNull: false
-    }
+      allowNull: false,
+    },
   },
   {
     sequelize,
     modelName: "User",
     tableName: "user",
     charset: "utf8",
-    collate: "utf8_general_ci"
+    collate: "utf8_general_ci",
   }
 );
 
@@ -69,12 +71,12 @@ export const associate = (db: dbType) => {
   db.User.belongsToMany(db.User, {
     through: "Follow",
     as: "Followers",
-    foreignKey: "followingId"
+    foreignKey: "followingId",
   });
   db.User.belongsToMany(db.User, {
     through: "Follow",
     as: "Followings",
-    foreignKey: "followerId"
+    foreignKey: "followerId",
   });
 };
 
