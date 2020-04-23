@@ -10,15 +10,15 @@ export default () => {
     "local",
     new Strategy(
       {
-        usernameField: "userId",
-        passwordField: "password"
+        usernameField: "userId", // front에서 req.body에 넣은 이름
+        passwordField: "password", // front에서 req.body에 넣은 이름
       },
       async (userId, password, done) => {
         try {
           const user = await User.findOne({ where: { userId } });
           if (!user) {
             return done(null, false, {
-              message: "존재하지 않는 사용자입니다!"
+              message: "존재하지 않는 사용자입니다!",
             });
           }
           const result = await bcrypt.compare(password, user.password);

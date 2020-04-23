@@ -11,6 +11,7 @@ export default () => {
   passport.serializeUser((user: User, done) => {
     // 로그인시 호출 됨
     // Strategy 성공 시 호출됨
+    // 서버쪽(새션)에 [{id:3, cookie: 'asdf'}] 이렇게 저장
     return done(null, user.id); // 여기의 user.id 가 deserializeUser의 첫 번째 매개변수로 이동
   });
 
@@ -24,19 +25,19 @@ export default () => {
           {
             model: Post,
             as: "Posts",
-            attributes: ["id"]
+            attributes: ["id"],
           },
           {
             model: User,
             as: "Followings",
-            attributes: ["id"]
+            attributes: ["id"],
           },
           {
             model: User,
             as: "Followers",
-            attributes: ["id"]
-          }
-        ]
+            attributes: ["id"],
+          },
+        ],
       });
       return done(null, user); // 여기의 user가 req.user가 됨
     } catch (e) {

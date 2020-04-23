@@ -38,7 +38,7 @@ if (prod) {
   app.use(
     cors({
       origin: /nodebird\.com$/,
-      credentials: true
+      credentials: true,
     })
   );
 } else {
@@ -46,7 +46,7 @@ if (prod) {
   app.use(
     cors({
       origin: true,
-      credentials: true
+      credentials: true,
     })
   );
 }
@@ -54,6 +54,7 @@ if (prod) {
 app.use("/", express.static("uploads"));
 app.use(express.json()); // req.body를 읽을 수 있게 해줌
 app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   expressSession({
@@ -63,9 +64,9 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false, // https를 쓸 때 true
-      domain: prod ? ".nodebird.com" : undefined
+      domain: prod ? ".nodebird.com" : undefined,
     },
-    name: "rnbck"
+    name: "rnbck",
   })
 );
 app.use(passport.initialize());
